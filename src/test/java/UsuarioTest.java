@@ -17,10 +17,10 @@ public class UsuarioTest {
 
     @Before
     public void init(){
-        Prenda zapato = new Prenda(new Tipo(Categoria.CALZADO), new Color(0, 0, 0), Material.CUERO);
-        Prenda camisa = new Prenda(new Tipo(Categoria.SUPERIOR), new Color(255, 0, 0), Material.ALGODON);
-        Prenda panueloVerde = new Prenda(new Tipo(Categoria.ACCESORIO), new Color(0, 255, 0), Material.CUERO);
-        Prenda pantalon = new Prenda(new Tipo(Categoria.INFERIOR), new Color(255, 255, 255), Material.PLASTICO);
+        Prenda zapato = new Prenda(new Tipo(Categoria.CALZADO), Material.CUERO, new Color(0, 0, 0));
+        Prenda camisa = new Prenda(new Tipo(Categoria.SUPERIOR), Material.ALGODON, new Color(255, 0, 0));
+        Prenda panueloVerde = new Prenda(new Tipo(Categoria.ACCESORIO), Material.CUERO, new Color(255, 0, 0));
+        Prenda pantalon = new Prenda(new Tipo(Categoria.INFERIOR), Material.PLASTICO, new Color(255, 255, 255));
 
         List<Prenda> prendas = new LinkedList<Prenda>();
         prendas.add(zapato);

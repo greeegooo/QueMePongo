@@ -1,6 +1,7 @@
 package ropero;
 
 import excepciones.PrendaException;
+import helpers.Helper;
 import ropero.caracteristicasDeLaPrenda.Color;
 import ropero.caracteristicasDeLaPrenda.Material;
 import ropero.caracteristicasDeLaPrenda.Tipo;
@@ -27,7 +28,7 @@ public class Prenda {
         return tipo;
     }
     public void setTipo(Tipo tipo) throws PrendaException {
-        if(tipo.equals(null)) {
+        if(Helper.isNull(tipo)) {
             throw new PrendaException("No se puede crear una prenda sin tipo.");
         }
         this.tipo = tipo;
@@ -37,7 +38,7 @@ public class Prenda {
         return colorPrimario;
     }
     public void setColorPrimario(Color colorPrimario) throws PrendaException {
-        if(colorPrimario.equals(null)) {
+        if(Helper.isNull(colorPrimario)) {
             throw new PrendaException("No se puede crear una prenda sin color primario.");
         }
         this.colorPrimario = colorPrimario;
@@ -54,7 +55,7 @@ public class Prenda {
         return material;
     }
     public void setMaterial(Material material) throws PrendaException {
-        if(colorPrimario.equals(null)) {
+        if(Helper.isNull(material)) {
             throw new PrendaException("No se puede crear una prenda sin material.");
         }
         this.material = material;

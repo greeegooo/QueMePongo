@@ -1,3 +1,4 @@
+import excepciones.PrendaException;
 import org.junit.Before;
 import org.junit.Test;
 import ropero.Prenda;
@@ -12,30 +13,28 @@ import static org.junit.Assert.*;
 
 public class PrendaTest {
 
-    public Prenda prenda;
+    public Color testColor = new Color(0,0,0);
+    public Material testMaterial = Material.CUERO;
+    public Categoria testCategoria = Categoria.INFERIOR;
+    public Tipo testTipo = new Tipo(testCategoria);
 
     @Before
     public void init(){}
 
     @Test
     public void unCollar_DeberiaSer_CategoriaAccesorio(){
-        Prenda collar = new Prenda(new Tipo(Categoria.ACCESORIO), Material.ALGODON, new Color(255, 0,0));
-        assertSame(collar.tipo.getCategoria(), Categoria.ACCESORIO);
+        Prenda collar = new Prenda(new Tipo(Categoria.ACCESORIO), testMaterial, testColor);
+        assertSame(collar.getTipo().getCategoria(), Categoria.ACCESORIO);
     }
 
     @Test
     public void unPantalon_NoDeberiaSer_CategoriaAccesorio(){
-        Prenda pantalon = new Prenda(new Tipo(Categoria.INFERIOR),null,null);
-        assertFalse(pantalon.tipo.getCategoria() == Categoria.ACCESORIO);
+        Prenda pantalon = new Prenda(new Tipo(Categoria.INFERIOR), testMaterial, testColor);
+        assertFalse(pantalon.getTipo().getCategoria() == Categoria.ACCESORIO);
     }
 
-    @Test
-    public void unCamisa_Deberia_SerDe(){
-        Prenda camisa = new Prenda(new Tipo(Categoria.ACCESORIO), null, null);
-    }
-
-    @Test
-    public void unasZapatillas_Deberia_SerUnCalzado(){
-        Prenda nuevaPrenda = new Prenda(new Tipo(Categoria.ACCESORIO), null, null);
+    @Test(expected = PrendaException.class)
+    public void crearUnaPrendaSinMaterial_Deberia_Fallar(){
+        new Prenda(new Tipo(Categoria.ACCESORIO), null, testColor);
     }
 }
