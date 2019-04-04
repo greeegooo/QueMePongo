@@ -1,3 +1,5 @@
+package ropero.caracteristicasDeLaPrenda;
+
 public class Color {
 
     public int red;
