@@ -24,7 +24,7 @@ public class PrendaTest {
     @Test
     public void unCollar_DeberiaSer_CategoriaAccesorio(){
         Prenda collar = new Prenda(new Tipo(Categoria.ACCESORIO), testMaterial, testColor);
-        assertSame(collar.getTipo().getCategoria(), Categoria.ACCESORIO);
+        assertSame(collar.getTipo().getCategoria(), Categoria.INFERIOR);
     }
 
     @Test
