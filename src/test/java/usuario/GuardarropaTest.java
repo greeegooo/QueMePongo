@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class GuardarropasTest {
+public class GuardarropaTest {
 
     private Color testColor = new Color(0,0,0);
     private Material testMaterial = Material.CUERO;
@@ -44,15 +44,15 @@ public class GuardarropasTest {
         Prenda calzado1 = builder.setTipo(new Tipo(Categoria.CALZADO)).build();
         Prenda calzado2 = builder.setTipo(new Tipo(Categoria.CALZADO)).build();
 
-        Guardarropas guardarropas = new Guardarropas();
-        guardarropas.agregarPrenda(remera1);
-        guardarropas.agregarPrenda(remera2);
-        guardarropas.agregarPrenda(pantalon1);
-        guardarropas.agregarPrenda(pantalon2);
-        guardarropas.agregarPrenda(calzado1);
-        guardarropas.agregarPrenda(calzado2);
+        Guardarropa guardarropa = new Guardarropa();
+        guardarropa.agregarPrenda(remera1);
+        guardarropa.agregarPrenda(remera2);
+        guardarropa.agregarPrenda(pantalon1);
+        guardarropa.agregarPrenda(pantalon2);
+        guardarropa.agregarPrenda(calzado1);
+        guardarropa.agregarPrenda(calzado2);
 
-        List<Atuendo> sugerencias = guardarropas.sugerencias();
+        List<Atuendo> sugerencias = guardarropa.sugerencias();
 
         Atuendo sugerencia1 = sugerencias.get(0);
 

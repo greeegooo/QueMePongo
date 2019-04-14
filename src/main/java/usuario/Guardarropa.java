@@ -8,7 +8,7 @@ import ropero.caracteristicasDeLaPrenda.Categoria;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Guardarropas {
+public class Guardarropa {
 
     private List<Prenda> prendas = new ArrayList<>();
 

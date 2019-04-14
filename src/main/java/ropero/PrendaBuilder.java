@@ -73,5 +73,6 @@ public class PrendaBuilder {
         if(Helper.isNull(material)) throw new PrendaException("No se puede crear una prenda sin material.");
         if(Helper.isNull(colorPrimario)) throw new PrendaException("No se puede crear una prenda sin color primario.");
         if(Helper.isNull(tipo)) throw new PrendaException("No se puede crear una prenda sin tipo.");
+        if(colorPrimario.equals(colorSecundario)) throw  new PrendaException("No se puede crear una prenda con colores iguales");
     }
 }

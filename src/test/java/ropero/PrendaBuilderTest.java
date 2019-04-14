@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class PrendaBuilderTest {
 
-    private Color testColor = new Color(0,0,0);
+    private Color testColor = new Color(0, 0, 0);
     private Material testMaterial = Material.CUERO;
     private Categoria testCategoria = Categoria.INFERIOR;
     private Tipo testTipo = new Tipo(testCategoria);
@@ -20,7 +20,7 @@ public class PrendaBuilderTest {
     private PrendaBuilder builder = new PrendaBuilder();
 
     @Before
-    public void init(){
+    public void init() {
         builder.setDescripcion(testDesc);
         builder.setColorPrimario(testColor);
         builder.setMaterial(testMaterial);
@@ -56,5 +56,26 @@ public class PrendaBuilderTest {
 
         builder.setMaterial(null);
         Prenda prenda = builder.build();
+    }
+
+    @Test(expected = PrendaException.class)
+    public void crearUnaPrendaConColoresIguales_Deberia_Fallar() {
+        Color colorPrimario = new Color(50, 50, 50);
+        Color colorSecundario = new Color(50, 50, 50);
+        ;
+        builder.setColorPrimario(colorPrimario);
+        builder.setColorSecundario(colorSecundario);
+
+        Prenda prenda = builder.build();
+    }
+
+    @Test
+    public void crearUnaPrendaConUnColor() {
+        Color colorPrimario = new Color(50, 50, 50);
+        builder.setColorPrimario(colorPrimario);
+
+        Prenda prenda = builder.build();
+
+        assertFalse(colorPrimario.equals(null));
     }
 }
