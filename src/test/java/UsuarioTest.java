@@ -13,6 +13,11 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class UsuarioTest {
+
+    private Prenda prendaSuperior;
+    private Prenda prendaInferior;
+    private Prenda calzado;
+
     private Atuendo atuendo = new Atuendo(prendaSuperior, prendaInferior, calzado);
 
     @Before
@@ -28,12 +33,9 @@ public class UsuarioTest {
         prendas.add(panueloVerde);
         prendas.add(pantalon);
 
-        atuendo.prendas = prendas;
     }
 
     @Test
     public void CreateUserTest(){
-        Usuario user = new Usuario(atuendo);
-        assertNotNull(user);
     }
 }
