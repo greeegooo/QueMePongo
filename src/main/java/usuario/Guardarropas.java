@@ -31,8 +31,8 @@ public class Guardarropas {
                   this.obtenerSetPrendasPorCategoria(Categoria.CALZADO),
                   this.obtenerSetPrendasPorCategoria(Categoria.ACCESORIO))
                 .stream()
-                .flatMap(listasPrenda -> listasPrenda.stream())
-                .map(listaPrenda -> this.crearAtuendo(listaPrenda))
+                .flatMap(Collection::stream)
+                .map(this::crearAtuendo)
                 .collect(Collectors.toList());
     }
 
