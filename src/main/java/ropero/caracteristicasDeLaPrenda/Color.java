@@ -1,5 +1,7 @@
 package ropero.caracteristicasDeLaPrenda;
 
+import java.util.Objects;
+
 public class Color {
 
     public int red;
@@ -10,5 +12,20 @@ public class Color {
         this.red = red;
         this.blue = blue;
         this.green = green;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Color)) return false;
+        Color color = (Color) o;
+        return red == color.red &&
+                green == color.green &&
+                blue == color.blue;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(red, green, blue);
     }
 }
