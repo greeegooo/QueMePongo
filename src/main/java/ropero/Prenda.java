@@ -2,6 +2,7 @@ package ropero;
 
 import excepciones.PrendaException;
 import helpers.Helper;
+import ropero.caracteristicasDeLaPrenda.Categoria;
 import ropero.caracteristicasDeLaPrenda.Color;
 import ropero.caracteristicasDeLaPrenda.Material;
 import ropero.caracteristicasDeLaPrenda.Tipo;
@@ -26,6 +27,11 @@ public class Prenda {
 
     public Tipo getTipo() {
         return tipo;
+    }
+
+
+    public Categoria getCategoria() {
+        return tipo.getCategoria();
     }
 
     public Color getColorPrimario() {
