@@ -26,14 +26,17 @@ public class Guardarropas {
     }
 
     public List<Atuendo> sugerencias() {
-          return Sets.cartesianProduct(this.obtenerSetPrendasPorCategoria(Categoria.SUPERIOR),
-                  this.obtenerSetPrendasPorCategoria(Categoria.INFERIOR),
-                  this.obtenerSetPrendasPorCategoria(Categoria.CALZADO),
-                  this.obtenerSetPrendasPorCategoria(Categoria.ACCESORIO))
-                .stream()
-                .flatMap(listasPrenda -> listasPrenda.stream())
-                .map(listaPrenda -> this.crearAtuendo(listaPrenda))
-                .collect(Collectors.toList());
+
+        Set<List<Prenda>> setPrendas = Sets.cartesianProduct(
+            this.obtenerSetPrendasPorCategoria(Categoria.SUPERIOR),
+            this.obtenerSetPrendasPorCategoria(Categoria.INFERIOR),
+            this.obtenerSetPrendasPorCategoria(Categoria.CALZADO)
+        );
+
+        return  setPrendas
+                 .stream()
+                 .map(listaPrenda -> this.crearAtuendo(listaPrenda))
+                 .collect(Collectors.toList());
     }
 
     public List<Prenda> obtenerPrendas(Categoria categoria) {
@@ -45,18 +48,10 @@ public class Guardarropas {
 
     private Atuendo crearAtuendo(List<Prenda> prendas) {
         boolean poseeAccesorio = prendas.stream().anyMatch(prenda -> prenda.getCategoria() == Categoria.CALZADO);
-        return new Atuendo(this.obtenerPrenda(prendas, Categoria.SUPERIOR), this.obtenerPrenda(prendas, Categoria.INFERIOR), this.obtenerPrenda(prendas, Categoria.CALZADO));
+        return new Atuendo(prendas.get(0), prendas.get(1), prendas.get(2));
     }
 
-    private Prenda obtenerPrenda(List<Prenda> prendas, Categoria categoria) {
-        return prendas.stream()
-                .filter(p -> p.getCategoria() == categoria)
-                .findFirst().get();
-    }
-
-    private Set<List<Prenda>> obtenerSetPrendasPorCategoria(Categoria categoria) {
-        Set<List<Prenda>> setPrendas = new HashSet<>();
-        setPrendas.add(this.obtenerPrendas(categoria));
-        return setPrendas;
+    private HashSet<Prenda> obtenerSetPrendasPorCategoria(Categoria categoria) {
+        return new HashSet<Prenda>(this.obtenerPrendas(categoria));
     }
 }

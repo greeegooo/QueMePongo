@@ -7,6 +7,8 @@ import ropero.caracteristicasDeLaPrenda.Color;
 import ropero.caracteristicasDeLaPrenda.Material;
 import ropero.caracteristicasDeLaPrenda.Tipo;
 
+import java.util.Objects;
+
 public class Prenda {
     private String descripcion;
     private Tipo tipo;
@@ -44,5 +46,22 @@ public class Prenda {
 
     public Material getMaterial() {
         return material;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Prenda)) return false;
+        Prenda prenda = (Prenda) o;
+        return descripcion.equals(prenda.descripcion) &&
+                tipo.equals(prenda.tipo) &&
+                colorPrimario.equals(prenda.colorPrimario) &&
+                Objects.equals(colorSecundario, prenda.colorSecundario) &&
+                material == prenda.material;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(descripcion, tipo, colorPrimario, colorSecundario, material);
     }
 }

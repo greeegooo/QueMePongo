@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class UsuarioTest {
-    private Atuendo atuendo = new Atuendo(prendaSuperior, prendaInferior, calzado);
+    private Atuendo atuendo;
 
     @Before
     public void init(){
@@ -28,7 +28,7 @@ public class UsuarioTest {
         prendas.add(panueloVerde);
         prendas.add(pantalon);
 
-        atuendo.prendas = prendas;
+        //atuendo.prendas = prendas;
     }
 
     @Test
