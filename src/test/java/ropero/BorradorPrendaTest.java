@@ -10,14 +10,14 @@ import ropero.caracteristicasDeLaPrenda.Tipo;
 
 import static org.junit.Assert.*;
 
-public class PrendaBuilderTest {
+public class BorradorPrendaTest {
 
     private Color testColor = new Color(0,0,0);
     private Material testMaterial = Material.CUERO;
     private Categoria testCategoria = Categoria.INFERIOR;
     private Tipo testTipo = new Tipo(testCategoria);
     private String testDesc = "TestPrenda";
-    private PrendaBuilder builder = new PrendaBuilder();
+    private BorradorPrenda builder = new BorradorPrenda();
 
     @Before
     public void init(){

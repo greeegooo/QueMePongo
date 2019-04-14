@@ -24,6 +24,10 @@ public class Prenda {
         this.colorSecundario = colorSecundario;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
     public Tipo getTipo() {
         return tipo;
     }

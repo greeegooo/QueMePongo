@@ -7,7 +7,7 @@ import ropero.caracteristicasDeLaPrenda.Material;
 import ropero.caracteristicasDeLaPrenda.Tipo;
 import ropero.caracteristicasDeLaPrenda.Trama;
 
-public class PrendaBuilder {
+public class BorradorPrenda {
 
     private String descripcion = "Prenda";
     private Tipo tipo;
@@ -19,43 +19,49 @@ public class PrendaBuilder {
     public String getDescripcion() {
         return descripcion;
     }
-    public void setDescripcion(String descripcion) {
+    public BorradorPrenda setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+        return this;
     }
 
     public Trama getTrama() {
         return trama;
     }
-    public void setTrama(Trama trama) {
+    public BorradorPrenda setTrama(Trama trama) {
         this.trama = trama;
+        return this;
     }
 
     public Tipo getTipo() {
         return tipo;
     }
-    public void setTipo(Tipo tipo) {
+    public BorradorPrenda setTipo(Tipo tipo) {
         this.tipo = tipo;
+        return this;
     }
 
     public Color getColorPrimario() {
         return colorPrimario;
     }
-    public void setColorPrimario(Color colorPrimario) {
+    public BorradorPrenda setColorPrimario(Color colorPrimario) {
         this.colorPrimario = colorPrimario;
+        return this;
     }
 
     public Color getColorSecundario() {
         return colorSecundario;
     }
-    public void setColorSecundario(Color colorSecundario) {
+    public BorradorPrenda setColorSecundario(Color colorSecundario) {
         this.colorSecundario = colorSecundario;
+        return this;
     }
 
     public Material getMaterial() {
         return material;
     }
-    public void setMaterial(Material material) {
+    public BorradorPrenda setMaterial(Material material) {
         this.material = material;
+        return this;
     }
 
     public Prenda build(){
