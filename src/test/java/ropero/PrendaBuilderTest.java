@@ -26,7 +26,6 @@ public class PrendaBuilderTest {
         builder.setMaterial(testMaterial);
         builder.setTipo(testTipo);
         builder.setColorPrimario(testColor);
-        builder.setColorSecundario(testColor);
     }
 
     @Test
