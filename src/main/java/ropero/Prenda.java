@@ -2,10 +2,7 @@ package ropero;
 
 import excepciones.PrendaException;
 import helpers.Helper;
-import ropero.caracteristicasDeLaPrenda.Categoria;
-import ropero.caracteristicasDeLaPrenda.Color;
-import ropero.caracteristicasDeLaPrenda.Material;
-import ropero.caracteristicasDeLaPrenda.Tipo;
+import ropero.caracteristicasDeLaPrenda.*;
 
 import java.util.Objects;
 
@@ -15,22 +12,20 @@ public class Prenda {
     private Color colorPrimario;
     private Color colorSecundario;
     private Material material;
+    private Trama trama;
 
-    public Prenda(String descripcion, Tipo tipo, Material material, Color colorPrimario){
+    public Prenda(String descripcion, Tipo tipo, Material material, Trama trama, Color colorPrimario, Color colorSecundario){
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.colorPrimario = colorPrimario;
         this.material = material;
-    }
-    public Prenda(String descripcion, Tipo tipo, Material material, Color colorPrimario, Color colorSecundario){
-        this(descripcion, tipo, material, colorPrimario);
+        this.trama = trama;
         this.colorSecundario = colorSecundario;
     }
 
     public Tipo getTipo() {
         return tipo;
     }
-
 
     public Categoria getCategoria() {
         return tipo.getCategoria();
@@ -48,6 +43,8 @@ public class Prenda {
         return material;
     }
 
+    public Trama getTrama() { return trama; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,11 +54,12 @@ public class Prenda {
                 tipo.equals(prenda.tipo) &&
                 colorPrimario.equals(prenda.colorPrimario) &&
                 Objects.equals(colorSecundario, prenda.colorSecundario) &&
-                material == prenda.material;
+                material == prenda.material &&
+                trama == prenda.trama;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(descripcion, tipo, colorPrimario, colorSecundario, material);
+        return Objects.hash(descripcion, tipo, colorPrimario, colorSecundario, material, trama);
     }
 }

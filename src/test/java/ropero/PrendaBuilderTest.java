@@ -3,10 +3,7 @@ package ropero;
 import excepciones.PrendaException;
 import org.junit.Before;
 import org.junit.Test;
-import ropero.caracteristicasDeLaPrenda.Categoria;
-import ropero.caracteristicasDeLaPrenda.Color;
-import ropero.caracteristicasDeLaPrenda.Material;
-import ropero.caracteristicasDeLaPrenda.Tipo;
+import ropero.caracteristicasDeLaPrenda.*;
 
 import static org.junit.Assert.*;
 
@@ -21,11 +18,12 @@ public class PrendaBuilderTest {
 
     @Before
     public void init() {
-        builder.setDescripcion(testDesc);
-        builder.setColorPrimario(testColor);
-        builder.setMaterial(testMaterial);
-        builder.setTipo(testTipo);
-        builder.setColorPrimario(testColor);
+        builder
+        .setDescripcion(testDesc)
+        .setColorPrimario(testColor)
+        .setMaterial(testMaterial)
+        .setTipo(testTipo)
+        .setColorPrimario(testColor);
     }
 
     @Test

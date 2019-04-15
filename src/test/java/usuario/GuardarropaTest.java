@@ -18,7 +18,14 @@ import static org.junit.Assert.*;
 
 public class GuardarropaTest {
 
+    private Color testColor = new Color(0, 0, 0);
+    private Material testMaterial = Material.CUERO;
+    private Categoria testCategoria = Categoria.INFERIOR;
+    private Tipo testTipo = new Tipo(testCategoria);
+    private String testDesc = "TestPrenda";
+    private PrendaBuilder builder = new PrendaBuilder();
     private Guardarropa guardarropas = new Guardarropa();
+
     private Prenda camisa;
     private Prenda chomba;
     private Prenda pantalon;
@@ -29,12 +36,19 @@ public class GuardarropaTest {
     @Before
     public void setUp() {
 
-        this.zapatos = new Prenda("Zapatos", new Tipo(Categoria.CALZADO), Material.CUERO, new Color(0, 0, 0));
-        this.ojotas = new Prenda("Ojotas", new Tipo(Categoria.CALZADO), Material.CUERO, new Color(0, 0, 0));
-        this.camisa = new Prenda("Camisa", new Tipo(Categoria.SUPERIOR), Material.ALGODON, new Color(255, 0, 0));
-        this.chomba = new Prenda("Chomba", new Tipo(Categoria.SUPERIOR), Material.ALGODON, new Color(255, 0, 0));
-        this.pantalon = new Prenda("Pantalon", new Tipo(Categoria.INFERIOR), Material.PLASTICO, new Color(255, 255, 255));
-        this.shorts = new Prenda("Shorts", new Tipo(Categoria.INFERIOR), Material.PLASTICO, new Color(255, 255, 255));
+        builder
+        .setDescripcion(testDesc)
+        .setColorPrimario(testColor)
+        .setMaterial(testMaterial)
+        .setTipo(testTipo)
+        .setColorPrimario(testColor);
+
+        this.zapatos = builder.setDescripcion("ZapatosTest").setTipo(new Tipo(Categoria.CALZADO)).build();
+        this.ojotas = builder.setDescripcion("OjotasTest").setTipo(new Tipo(Categoria.CALZADO)).build();
+        this.camisa = builder.setDescripcion("CamisaTest").setTipo(new Tipo(Categoria.SUPERIOR)).build();
+        this.chomba = builder.setDescripcion("ChombaTest").setTipo(new Tipo(Categoria.SUPERIOR)).build();
+        this.pantalon = builder.setDescripcion("PantalonTest").setTipo(new Tipo(Categoria.INFERIOR)).build();
+        this.shorts = builder.setDescripcion("ShortsTest").setTipo(new Tipo(Categoria.INFERIOR)).build();
 
         List<Prenda> prendas = new LinkedList();
         Collections.addAll(prendas, this.camisa, this.chomba, this.shorts, this.pantalon, this.zapatos, this.ojotas);
@@ -43,6 +57,7 @@ public class GuardarropaTest {
 
     @Test
     public void ObtenerSugerencias(){
+
         List<Atuendo> atuendos = this.guardarropas.sugerencias();
         assertEquals(atuendos.size(), 8);
 

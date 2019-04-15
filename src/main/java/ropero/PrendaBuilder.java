@@ -66,7 +66,7 @@ public class PrendaBuilder {
 
     public Prenda build(){
         validar();
-        return new Prenda(descripcion, tipo, material, colorPrimario, colorSecundario);
+        return new Prenda(descripcion, tipo, material, trama, colorPrimario, colorSecundario);
     }
 
     private void validar(){
