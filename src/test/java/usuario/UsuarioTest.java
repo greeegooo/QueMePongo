@@ -1,3 +1,5 @@
+package usuario;
+
 import ropero.*;
 import ropero.caracteristicasDeLaPrenda.Categoria;
 import ropero.caracteristicasDeLaPrenda.Color;

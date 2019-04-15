@@ -3,6 +3,8 @@ package usuario;
 import ropero.Atuendo;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Usuario {
 
@@ -18,12 +20,10 @@ public class Usuario {
         guardarropas.add(guardarropa);
     }
 
-    private List<Atuendo> queMePongo(){
-        List<Atuendo> sugerenciaDeAtuendos = new LinkedList<>();
-        for (Guardarropa guardarropa : guardarropas){
-            List<Atuendo> sugerencia = guardarropa.sugerencias();
-            sugerenciaDeAtuendos.addAll(sugerencia);
-        }
-        return sugerenciaDeAtuendos;
+    private List<Atuendo> queMePongo() {
+        return guardarropas.stream()
+            .map(g -> g.sugerencias())
+            .flatMap(List::stream)
+            .collect(Collectors.toList());
     }
 }
