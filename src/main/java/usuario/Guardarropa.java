@@ -19,20 +19,33 @@ public class Guardarropa {
     public List<Atuendo> sugerencias() {
 
         Set<List<Prenda>> productoCartesiano = Sets.cartesianProduct(
-            new HashSet<>(obtenerPrendas(Categoria.SUPERIOR)),
-            new HashSet<>(obtenerPrendas(Categoria.INFERIOR)),
-            new HashSet<>(obtenerPrendas(Categoria.CALZADO))
+            new HashSet<>(obtenerPrendasUsables(Categoria.SUPERIOR)),
+            new HashSet<>(obtenerPrendasUsables(Categoria.INFERIOR)),
+            new HashSet<>(obtenerPrendasUsables(Categoria.CALZADO))
         );
 
         return productoCartesiano
-            .stream()
-            .map(s -> new Atuendo(s.get(0), s.get(1), s.get(2)))
+            .stream().map(sugerencia -> armarAtuendo(sugerencia))
+            .collect(Collectors.toList());
+    }
+
+    public List<Prenda> obtenerPrendasUsables(Categoria categoria) {
+
+        return obtenerPrendas(categoria)
+            .stream().filter(prenda -> prenda.sePuedeUsar())
             .collect(Collectors.toList());
     }
 
     public List<Prenda> obtenerPrendas(Categoria categoria) {
-        return prendas.stream()
-            .filter(atuendo -> atuendo.getCategoria() == categoria)
+
+        return prendas
+            .stream().filter(atuendo -> atuendo.getCategoria() == categoria)
             .collect(Collectors.toList());
+    }
+
+    private Atuendo armarAtuendo(List<Prenda> sugerencia) {
+
+        sugerencia.forEach(prenda -> prenda.usar());
+        return new Atuendo(sugerencia.get(0), sugerencia.get(1), sugerencia.get(2));
     }
 }
