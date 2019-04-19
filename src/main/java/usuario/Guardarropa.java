@@ -16,18 +16,38 @@ public class Guardarropa {
         this.prendas.add(prenda);
     }
 
-    public List<Atuendo> sugerencias() {
+    public List<Atuendo> sugerencias(boolean conAccesorios) {
 
-        Set<List<Prenda>> productoCartesiano = Sets.cartesianProduct(
-            new HashSet<>(obtenerPrendas(Categoria.SUPERIOR)),
-            new HashSet<>(obtenerPrendas(Categoria.INFERIOR)),
-            new HashSet<>(obtenerPrendas(Categoria.CALZADO))
-        );
+        Set<List<Prenda>> productoCartesiano;
+
+        if (conAccesorios) {
+            productoCartesiano = Sets.cartesianProduct(
+                    new HashSet<>(obtenerPrendas(Categoria.SUPERIOR)),
+                    new HashSet<>(obtenerPrendas(Categoria.INFERIOR)),
+                    new HashSet<>(obtenerPrendas(Categoria.CALZADO)),
+                    new HashSet<>(obtenerPrendas(Categoria.ACCESORIO))
+            );
+        }
+        else {
+            productoCartesiano = Sets.cartesianProduct(
+                    new HashSet<>(obtenerPrendas(Categoria.SUPERIOR)),
+                    new HashSet<>(obtenerPrendas(Categoria.INFERIOR)),
+                    new HashSet<>(obtenerPrendas(Categoria.CALZADO))
+            );
+        }
 
         return productoCartesiano
             .stream()
-            .map(s -> new Atuendo(s.get(0), s.get(1), s.get(2)))
+            .map(prendas -> this.crearAtuendo(prendas, conAccesorios))
             .collect(Collectors.toList());
+    }
+
+    private Atuendo crearAtuendo(List<Prenda> prendas, boolean conAccesorio) {
+        Atuendo atuendo = new Atuendo(prendas.get(0), prendas.get(1), prendas.get(2));
+        if (conAccesorio) {
+            atuendo.setAccesorio(prendas.get(3));
+        }
+        return atuendo;
     }
 
     public List<Prenda> obtenerPrendas(Categoria categoria) {

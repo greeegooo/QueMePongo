@@ -32,6 +32,8 @@ public class GuardarropaTest {
     private Prenda shorts;
     private Prenda zapatos;
     private Prenda ojotas;
+    private Prenda collar;
+    private Prenda reloj;
 
     @Before
     public void setUp() {
@@ -49,59 +51,42 @@ public class GuardarropaTest {
         this.chomba = builder.setDescripcion("ChombaTest").setTipo(new Tipo(Categoria.SUPERIOR)).build();
         this.pantalon = builder.setDescripcion("PantalonTest").setTipo(new Tipo(Categoria.INFERIOR)).build();
         this.shorts = builder.setDescripcion("ShortsTest").setTipo(new Tipo(Categoria.INFERIOR)).build();
+        this.collar = builder.setDescripcion("CollarTest").setTipo(new Tipo(Categoria.ACCESORIO)).build();
+        this.reloj = builder.setDescripcion("RelojTest").setTipo(new Tipo(Categoria.ACCESORIO)).build();
 
         List<Prenda> prendas = new LinkedList();
-        Collections.addAll(prendas, this.camisa, this.chomba, this.shorts, this.pantalon, this.zapatos, this.ojotas);
+        Collections.addAll(prendas, this.camisa, this.chomba, this.shorts, this.pantalon, this.zapatos, this.ojotas, this.collar, this.reloj);
         prendas.forEach(prenda -> this.guardarropas.agregarPrenda(prenda));
     }
 
     @Test
-    public void ObtenerSugerencias(){
+    public void obtener_Sugerencias_Sin_Accesorios(){
 
-        List<Atuendo> atuendos = this.guardarropas.sugerencias();
-        assertEquals(atuendos.size(), 8);
+        List<Atuendo> atuendos = this.guardarropas.sugerencias(false);
 
-        /*
-        Atuendo atuendo1 = atuendos.get(0);
-        Atuendo atuendo2 = atuendos.get(1);
-        Atuendo atuendo3 = atuendos.get(2);
-        Atuendo atuendo4 = atuendos.get(3);
-        Atuendo atuendo5 = atuendos.get(4);
-        Atuendo atuendo6 = atuendos.get(5);
-        Atuendo atuendo7 = atuendos.get(6);
-        Atuendo atuendo8 = atuendos.get(7);
+        assertEquals(8, atuendos.size());
 
-        assertEquals(atuendo1.getPrendaSuperior(), this.camisa);
-        assertEquals(atuendo1.getPrendaInferior(), this.shorts);
-        assertEquals(atuendo1.getCalzado(), this.zapatos);
+        atuendos.forEach(atuendo -> {
+            assertEquals(null, atuendo.getAccesorio());
+            for (int index = 0; index < atuendos.size(); index++) {
+                if (atuendo != atuendos.get(index))
+                assertNotEquals(atuendos.get(index), atuendo);
+            }
+        });
+    }
 
-        assertEquals(atuendo2.getPrendaSuperior(), this.camisa);
-        assertEquals(atuendo2.getPrendaInferior(), this.shorts);
-        assertEquals(atuendo2.getCalzado(), this.ojotas);
+    @Test
+    public void obtener_Sugerencias_Con_Accesorios(){
 
-        assertEquals(atuendo3.getPrendaSuperior(), this.camisa);
-        assertEquals(atuendo3.getPrendaInferior(), this.pantalon);
-        assertEquals(atuendo3.getCalzado(), this.zapatos);
+        List<Atuendo> atuendos = this.guardarropas.sugerencias(true);
 
-        assertEquals(atuendo4.getPrendaSuperior(), this.camisa);
-        assertEquals(atuendo4.getPrendaInferior(), this.pantalon);
-        assertEquals(atuendo4.getCalzado(), this.zapatos);
-
-        assertEquals(atuendo5.getPrendaSuperior(), this.chomba);
-        assertEquals(atuendo5.getPrendaInferior(), this.shorts);
-        assertEquals(atuendo5.getCalzado(), this.zapatos);
-
-        assertEquals(atuendo6.getPrendaSuperior(), this.chomba);
-        assertEquals(atuendo6.getPrendaInferior(), this.shorts);
-        assertEquals(atuendo6.getCalzado(), this.ojotas);
-
-        assertEquals(atuendo7.getPrendaSuperior(), this.chomba);
-        assertEquals(atuendo7.getPrendaInferior(), this.pantalon);
-        assertEquals(atuendo7.getCalzado(), this.zapatos);
-
-        assertEquals(atuendo8.getPrendaSuperior(), this.chomba);
-        assertEquals(atuendo8.getPrendaInferior(), this.pantalon);
-        assertEquals(atuendo8.getCalzado(), this.ojotas);
-        */
+        assertEquals(16, atuendos.size());
+        atuendos.forEach(atuendo -> {
+            assertNotEquals(null, atuendo.getAccesorio());
+            for (int index = 0; index < atuendos.size(); index++) {
+                if (atuendo != atuendos.get(index))
+                    assertNotEquals(atuendo, atuendos.get(index));
+            }
+        });
     }
 }

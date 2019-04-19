@@ -20,9 +20,9 @@ public class Usuario {
         guardarropas.add(guardarropa);
     }
 
-    private List<Atuendo> queMePongo() {
+    private List<Atuendo> queMePongo(boolean conAccesorios) {
         return guardarropas.stream()
-            .map(g -> g.sugerencias())
+            .map(g -> g.sugerencias(conAccesorios))
             .flatMap(List::stream)
             .collect(Collectors.toList());
     }
