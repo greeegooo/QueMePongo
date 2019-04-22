@@ -50,7 +50,7 @@ public class Guardarropa {
         return atuendo;
     }
 
-    public List<Prenda> obtenerPrendas(Categoria categoria) {
+    private List<Prenda> obtenerPrendas(Categoria categoria) {
         return prendas.stream()
             .filter(atuendo -> atuendo.getCategoria() == categoria)
             .collect(Collectors.toList());
