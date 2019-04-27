@@ -7,6 +7,7 @@ import ropero.caracteristicasDeLaPrenda.Categoria;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Guardarropa {
 
@@ -16,30 +17,43 @@ public class Guardarropa {
         this.prendas.add(prenda);
     }
 
-    public List<Atuendo> sugerencias(boolean conAccesorios) {
+    public Stream<Atuendo> sugerencias() {
 
-        Set<List<Prenda>> productoCartesiano;
+        Set<List<Prenda>> productoCartesianoSinAccesorios = Collections.emptySet();
+        Set<List<Prenda>> productoCartesianoConAccesorios = Collections.emptySet();
 
-        if (conAccesorios) {
-            productoCartesiano = Sets.cartesianProduct(
-                    new HashSet<>(obtenerPrendas(Categoria.SUPERIOR)),
-                    new HashSet<>(obtenerPrendas(Categoria.INFERIOR)),
-                    new HashSet<>(obtenerPrendas(Categoria.CALZADO)),
-                    new HashSet<>(obtenerPrendas(Categoria.ACCESORIO))
-            );
-        }
-        else {
-            productoCartesiano = Sets.cartesianProduct(
-                    new HashSet<>(obtenerPrendas(Categoria.SUPERIOR)),
-                    new HashSet<>(obtenerPrendas(Categoria.INFERIOR)),
-                    new HashSet<>(obtenerPrendas(Categoria.CALZADO))
-            );
-        }
+        Map<Categoria, Set<Prenda>> prendasPorCategoria = this.prendas.stream().collect(
+                Collectors.groupingBy(Prenda::getCategoria, Collectors.toSet())
+        );
 
-        return productoCartesiano
+            if (this.formanAtuendo(prendasPorCategoria.keySet())) {
+                productoCartesianoSinAccesorios = Sets.cartesianProduct(
+                        prendasPorCategoria.get(Categoria.SUPERIOR),
+                        prendasPorCategoria.get(Categoria.INFERIOR),
+                        prendasPorCategoria.get(Categoria.CALZADO)
+                );
+            }
+
+            if (prendasPorCategoria.size() == 4) {
+                productoCartesianoConAccesorios = Sets.cartesianProduct(
+                        prendasPorCategoria.get(Categoria.SUPERIOR),
+                        prendasPorCategoria.get(Categoria.INFERIOR),
+                        prendasPorCategoria.get(Categoria.CALZADO),
+                        prendasPorCategoria.get(Categoria.ACCESORIO));
+            }
+
+        return combinacionSugerencias(productoCartesianoSinAccesorios, productoCartesianoConAccesorios);
+    }
+
+    private Stream<Atuendo> combinacionSugerencias(Set<List<Prenda>> productoCartesianoSinAccesorios, Set<List<Prenda>> productoCartesianoConAccesorios) {
+        return Stream.concat(this.convertirPrendasEnAtuendos(productoCartesianoSinAccesorios, false),
+                this.convertirPrendasEnAtuendos(productoCartesianoConAccesorios, true));
+    }
+
+    private Stream<Atuendo> convertirPrendasEnAtuendos(Set<List<Prenda>> productoCartesianoPrendas, boolean conAccesorio) {
+        return productoCartesianoPrendas
             .stream()
-            .map(prendas -> this.crearAtuendo(prendas, conAccesorios))
-            .collect(Collectors.toList());
+            .map(prendas -> this.crearAtuendo(prendas, conAccesorio));
     }
 
     private Atuendo crearAtuendo(List<Prenda> prendas, boolean conAccesorio) {
@@ -50,9 +64,9 @@ public class Guardarropa {
         return atuendo;
     }
 
-    private List<Prenda> obtenerPrendas(Categoria categoria) {
-        return prendas.stream()
-            .filter(atuendo -> atuendo.getCategoria() == categoria)
-            .collect(Collectors.toList());
+    private boolean formanAtuendo(Set<Categoria> categorias) {
+        return categorias.contains(Categoria.SUPERIOR)
+            && categorias.contains(Categoria.INFERIOR)
+            && categorias.contains(Categoria.CALZADO);
     }
 }

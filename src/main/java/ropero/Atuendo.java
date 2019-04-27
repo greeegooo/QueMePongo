@@ -10,7 +10,7 @@ public class Atuendo {
     private Prenda prendaSuperior;
     private Prenda prendaInferior;
     private Prenda calzado;
-    private Prenda Accesorio;
+    private Prenda accesorio;
 
     public Atuendo(Prenda prendaSuperior, Prenda prendaInferior, Prenda calzado) {
         if(prendaInferior == null) throw new RuntimeException("Prenda Inferior no puede estar vacío");
@@ -35,11 +35,15 @@ public class Atuendo {
     }
 
     public Prenda getAccesorio() {
-        return Accesorio;
+        return accesorio;
     }
 
     public void setAccesorio(Prenda accesorio) {
-        Accesorio = accesorio;
+        this.accesorio = accesorio;
+    }
+
+    public boolean poseeAccesorio() {
+        return this.accesorio != null;
     }
 
     @Override
@@ -50,11 +54,11 @@ public class Atuendo {
         return prendaSuperior.equals(atuendo.prendaSuperior) &&
                 prendaInferior.equals(atuendo.prendaInferior) &&
                 calzado.equals(atuendo.calzado) &&
-                Objects.equals(Accesorio, atuendo.Accesorio);
+                Objects.equals(accesorio, atuendo.accesorio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prendaSuperior, prendaInferior, calzado, Accesorio);
+        return Objects.hash(prendaSuperior, prendaInferior, calzado, accesorio);
     }
 }
