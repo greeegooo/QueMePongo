@@ -30,7 +30,8 @@ public class PrendaBuilderTest {
     public void unCollar_DeberiaSer_CategoriaAccesorio() {
 
         Tipo tipoCollar = new Tipo(Categoria.ACCESORIO);
-        builder.setTipo(tipoCollar);
+        builder.setTipo(tipoCollar).setColorPrimario(new Color(255, 255, 255));
+
 
         Prenda collar = builder.build();
 

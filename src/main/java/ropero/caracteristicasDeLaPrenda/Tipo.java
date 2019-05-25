@@ -10,4 +10,8 @@ public class Tipo {
     public Categoria getCategoria(){
         return this.categoria;
     }
+
+    public boolean esValido(Material material) {
+        return this.categoria.esValido(material);
+    }
 }
